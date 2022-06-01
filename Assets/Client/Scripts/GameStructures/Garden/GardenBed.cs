@@ -1,16 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GardenBed : MonoBehaviour
+[RequireComponent(typeof(BoxCollider))]
+public class GardenBed : MonoBehaviour, IInteractable
 {
     [SerializeField] private Vector2Int _size = new Vector2Int(2,1);
     [SerializeField] private Vector2 _offset = new Vector2(1, 1);
     [SerializeField] private Crops _cropsPrefab;
 
+
     private CropsPool cropsPool;
+    private BoxCollider gardenCollider;
+
+    public GameObject CurrentObject => gameObject;
+
+    #region Events
+    public event Action<IInteractable, Player> OnPlayerEnterEvent;
+    public event Action<IInteractable> OnPlayerExitEvent;
+    #endregion
     private void Awake()
     {
+        gardenCollider = GetComponent<BoxCollider>();
         Planting(_cropsPrefab);
     }
     private void Planting(Crops prefab)
@@ -27,5 +39,29 @@ public class GardenBed : MonoBehaviour
             }
             
         }
+
+        gardenCollider.isTrigger = true;
+        gardenCollider.center = new Vector3(_size.x * _offset.x / 2, 1f, _size.y * _offset.y / 2);
+        gardenCollider.size = new Vector3(_size.x * _offset.x, 1f, _size.y * _offset.y);
     }
+    public void Interact()
+    {
+
+    }
+    #region PlayerTrigger
+    public void OnTriggerEnter(Collider other)
+    {
+        var player = other.GetComponent<Player>();
+
+        if (player != null)
+            OnPlayerEnterEvent?.Invoke(this,player);
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        var player = other.GetComponent<Player>();
+
+        if (player != null)
+            OnPlayerExitEvent?.Invoke(this);
+    }
+    #endregion
 }

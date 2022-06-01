@@ -119,9 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8abe296fa67fa2a46bbcd9dc94a18b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 11400000, guid: c8297989292894f4b90c89421768b517, type: 2}
-  _slicer: {fileID: 7984219733252358232}
+  _info: {fileID: 11400000, guid: c8297989292894f4b90c89421768b517, type: 2}
   _cropsStackPrefab: {fileID: 7566442761198584438, guid: 1ba35806b8eb7c945b11edb4c44da896, type: 3}
+  _slicer: {fileID: 7984219733252358232}
 --- !u!1001 &8144701922353685677
 PrefabInstance:
   m_ObjectHideFlags: 0

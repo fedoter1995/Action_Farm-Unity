@@ -1,6 +1,6 @@
 using UnityEngine;
 [CreateAssetMenu(menuName = "Stats/Crops")]
-public class CropsStats : ItemStats
+public class CropsInfo : ItemInfo
 {
     [SerializeField] private Vector2 _size = Vector2.one;
     [SerializeField] private int _growingTime = 10;

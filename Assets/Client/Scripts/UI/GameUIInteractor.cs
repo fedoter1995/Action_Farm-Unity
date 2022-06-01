@@ -15,12 +15,12 @@ public class GameUIInteractor : Interactor
         GetInteractors();
     }
     public override void OnStart()
-    {
-        
+    {        
         InitCoinsCounterUI();
         InitBackpackUI();
         InitCoinsPool();
         InitWorkshopPanelUI();
+        InitGardenBedPanelUI();
     }
     private void LoadResources()
     {
@@ -53,10 +53,14 @@ public class GameUIInteractor : Interactor
     private void InitWorkshopPanelUI()
     {
         var workshops = GameObject.FindObjectsOfType<Workshop>();
-        foreach (Workshop workshop in workshops)
+
+        if (workshops.Length > 0)
         {
-            workshop.EnterTheWorkshopEvent += ui.WorkshopPanel.WhenPlayerEnter;
-            workshop.ExitTheWorkshopEvent += ui.WorkshopPanel.WhenPlayerExit;            
+            foreach (IInteractable workshop in workshops)
+            {
+                workshop.OnPlayerEnterEvent += ui.WorkshopPanel.OnPlayerEnter;
+                workshop.OnPlayerExitEvent += ui.WorkshopPanel.OnPlayerExit;
+            }
         }
     }
     private void InitCoinsPool()
@@ -67,7 +71,19 @@ public class GameUIInteractor : Interactor
             barn.BarterEvent += ui.CoinsPool.GetCoin;
         }
     }
+    private void InitGardenBedPanelUI()
+    {
+        var gardens = GameObject.FindObjectsOfType<GardenBed>();
+        if(gardens.Length > 0)
+        {
+            foreach (GardenBed gardenBed in gardens)
+            {
+                gardenBed.OnPlayerEnterEvent += ui.GardenBedPanel.OnPlayerEnter;
+                gardenBed.OnPlayerExitEvent += ui.GardenBedPanel.OnPlayerExit;
+            }
+        }
 
+    }
 
 
 }

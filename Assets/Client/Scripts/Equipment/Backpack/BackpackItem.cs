@@ -2,10 +2,10 @@
 using UnityEngine;
 public class BackpackItem : MonoBehaviour, IBackpackItem
 {
-    [SerializeField] private ItemStats stats;
+    [SerializeField] private ItemInfo stats;
 
-    public int id => stats.ID;
-    public ItemStats Stats => stats;
+    public string Id => stats.ID;
+    public ItemInfo Stats => stats;
     public GameObject ItemGameObject => gameObject;
 
     public int Price => stats.Price;
@@ -21,7 +21,7 @@ public class BackpackItem : MonoBehaviour, IBackpackItem
     {
         backpack.TryToAddToBackpack(this);
     }
-    public void Construct(ItemStats stats)
+    public void Construct(ItemInfo stats)
     {
         this.stats = stats;
     }

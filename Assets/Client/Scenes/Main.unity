@@ -180,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8050016574403363533, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.65
+      value: -0.18
       objectReference: {fileID: 0}
     - target: {fileID: 8050016574403363533, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
       propertyPath: m_LocalPosition.y
@@ -219,44 +219,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _crops
-      value: 
-      objectReference: {fileID: 8144701922270605740, guid: 654e179e3a0aa0146a6ee2222043a012, type: 3}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _size.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _size.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _offset.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _offset.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _cropsList
-      value: 
-      objectReference: {fileID: 8144701922270605740, guid: 654e179e3a0aa0146a6ee2222043a012, type: 3}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
       propertyPath: _cropsPrefab
       value: 
       objectReference: {fileID: 6099813727740610615, guid: 88859197734e07e40a7e0721d879807f, type: 3}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _cropsList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _cropsList.Array.data[0]
-      value: 
-      objectReference: {fileID: 8144701922270605740, guid: 654e179e3a0aa0146a6ee2222043a012, type: 3}
     - target: {fileID: 8050016574403363535, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
       propertyPath: m_Name
       value: Garden (Carrot)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260943402099353322, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
@@ -679,45 +651,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _crops
-      value: 
-      objectReference: {fileID: 8144701922270605740, guid: 654e179e3a0aa0146a6ee2222043a012, type: 3}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _size.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _size.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _offset.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _offset.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _cropsList
-      value: 
-      objectReference: {fileID: 8144701922270605740, guid: 654e179e3a0aa0146a6ee2222043a012, type: 3}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _cropsPrefab
-      value: 
-      objectReference: {fileID: 8144701922270605740, guid: 654e179e3a0aa0146a6ee2222043a012, type: 3}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _cropsList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8050016574403363534, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
-      propertyPath: _cropsList.Array.data[0]
-      value: 
-      objectReference: {fileID: 8144701922270605740, guid: 654e179e3a0aa0146a6ee2222043a012, type: 3}
     - target: {fileID: 8050016574403363535, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
       propertyPath: m_Name
       value: Garden(Wheat)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260943402099353322, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 462b1c2f27f32b5469f591f2072e2597, type: 3}

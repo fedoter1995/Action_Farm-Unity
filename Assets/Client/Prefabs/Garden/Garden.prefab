@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50ab3308cb397a4c9aef0a3b8ffabff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: {x: 5, y: 4}
+  _size: {x: 7, y: 5}
   _offset: {x: 0.2, y: 0.2}
-  _cropsFactory: {fileID: 11400000, guid: eed15a3134468ab4f85472c44e69b1cb, type: 2}
-  _cropsStackPool: {fileID: 11400000, guid: 68071959bba61334391f5362cc478998, type: 2}
+  _cropsPrefab: {fileID: 8144701922270605740, guid: 654e179e3a0aa0146a6ee2222043a012, type: 3}

@@ -21,7 +21,6 @@ public class ShopUiItem : MonoBehaviour
     public void SetItem(Equipment item, bool hasItem)
     {
         this.item = item;
-        Debug.Log(this.item);
         SetMainIcon(item.GetStats().Icon);
         SetSoldIcon(hasItem);
         SetTitle(item.GetStats().Title);

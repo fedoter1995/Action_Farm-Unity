@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CustomTools;
 
-public class WorkshopPanel : MonoBehaviour
+public class WorkshopPanel : MonoBehaviour , IInteractablePanel
 {
     [SerializeField] private List<ShopUiItem> _uiItems;
     [SerializeField] private ShopUiItem _uiSlotPrefab;
@@ -13,16 +13,16 @@ public class WorkshopPanel : MonoBehaviour
     private List<ShopUiItem> activeSlots = new List<ShopUiItem>();
     private void Start()
     {
-        InitCapacity();
-        ChangeActivity();
+        Initialize();
     }
-    private void ChangeActivity()
+    public void ChangeActivity(bool activity)
     {
-        gameObject.SetActive(!gameObject.activeInHierarchy);
+        gameObject.SetActive(activity);
     }
-
-    private void ShowAssortment(Workshop workshop, Player player)
+    public void ShowContent(IInteractable obj, Player player)
     {
+        ChangeActivity(true);
+        var workshop = obj as Workshop;
         foreach(Equipment item in workshop.Assortment)
         {
             var uiSlot = uiItemPool.GetFreeObject();
@@ -32,30 +32,37 @@ public class WorkshopPanel : MonoBehaviour
             uiSlot.SetItem(item, player.Equipments.HasWeapon(item.GetStats().ID));
         }
     }
-
-    public void WhenPlayerEnter(Workshop workshop, Player player)
+    public void HideContent(IInteractable obj)
     {
-        ChangeActivity();
-        ShowAssortment(workshop, player);
-    }
-    public void WhenPlayerExit(Workshop workshop)
-    {
-        HideSlots(workshop);
-        ChangeActivity();
-    }
-    private void HideSlots(Workshop workshop)
-    {
+        var workshop = obj as Workshop;
         foreach (ShopUiItem uiSlot in activeSlots)
         {
             uiSlot.TryToBuyEvent -= workshop.BuyItem;
             uiSlot.gameObject.SetActive(false);
         }
+        ChangeActivity(false);
+    }
+    public void OnPlayerEnter(IInteractable obj, Player player)
+    {
+        var workshop = obj as Workshop;
+        if(workshop != null)
+        {
+            ShowContent(workshop, player);
+        }
 
     }
-    private void InitCapacity()
+    public void OnPlayerExit(IInteractable obj)
+    {
+        var workshop = obj as Workshop;
+        if (workshop != null)
+        {
+            HideContent(workshop);
+        }
+    }
+    private void Initialize()
     {
         uiItemPool = new Pool<ShopUiItem>(_uiSlotPrefab, _capacity, _parent, false);
+        ChangeActivity(false);
     }
 
-    
 }

@@ -20,6 +20,6 @@ public class Wheat : Crops, ITakeDamge
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position, new Vector3(_stats.Size.x, 0.1f, _stats.Size.y));
+        Gizmos.DrawCube(transform.position, new Vector3(_info.Size.x, 0.1f, _info.Size.y));
     }
 }

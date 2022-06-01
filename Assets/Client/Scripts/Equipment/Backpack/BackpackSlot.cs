@@ -4,7 +4,7 @@
 
     public IBackpackItem item { get; private set; }
 
-    public int itemID => item.id;
+    public string itemID => item.Id;
 
     public void Clear()
     {

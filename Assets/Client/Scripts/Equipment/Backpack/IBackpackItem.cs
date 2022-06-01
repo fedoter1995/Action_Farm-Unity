@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 public interface IBackpackItem : IPickupItem, IHasPrice
 {
-    int id { get; }
-    ItemStats Stats { get; }
+    string Id { get; }
+    ItemInfo Stats { get; }
     public GameObject ItemGameObject { get; }
 }
 

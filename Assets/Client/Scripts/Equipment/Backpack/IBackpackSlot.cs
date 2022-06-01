@@ -2,7 +2,7 @@
 {
     bool isEmpty { get; }
     IBackpackItem item { get; }
-    int itemID { get; }
+    string itemID { get; }
     void SetItem(IBackpackItem item);
     void Clear();
 }

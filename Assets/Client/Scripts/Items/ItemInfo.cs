@@ -1,12 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-public class ItemStats : ScriptableObject
+public class ItemInfo : ScriptableObject
 {
-    [SerializeField] private int _id;
+    [SerializeField] private string _id;
     [SerializeField] private int _price;
 
-    public int ID  => _id;
+    public string ID  => _id;
     public int Price => _price;
 }
 

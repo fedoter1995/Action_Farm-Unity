@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Architecture;
 
-public class Workshop : MonoBehaviour, IStore
+public class Workshop : MonoBehaviour, IStore, IInteractable
 {
     [SerializeField] private List<Equipment> _assortment;
     [SerializeField] private WorkshopZone _workshopZone;
@@ -11,10 +11,11 @@ public class Workshop : MonoBehaviour, IStore
     private Player player;
     #region Events
     public event Action<object, object, int> BarterEvent;
-    public event Action<Workshop, Player> EnterTheWorkshopEvent;
-    public event Action<Workshop> ExitTheWorkshopEvent;
+    public event Action<IInteractable, Player> OnPlayerEnterEvent;
+    public event Action<IInteractable> OnPlayerExitEvent;
     #endregion
     public List<Equipment> Assortment => _assortment;
+    public GameObject CurrentObject => gameObject;
 
     private void Awake()
     {
@@ -63,13 +64,17 @@ public class Workshop : MonoBehaviour, IStore
     private void EnterTheWorkshop(Player player)
     {
         this.player = player;
-        EnterTheWorkshopEvent?.Invoke(this, player);            
+        OnPlayerEnterEvent?.Invoke(this, player);            
     }
     private void ExitTheWorkshop()
     {
         player = null;
-        ExitTheWorkshopEvent?.Invoke(this);
+        OnPlayerExitEvent?.Invoke(this);
     }
 
+    public void Interact()
+    {
+        throw new NotImplementedException();
+    }
     #endregion
 }

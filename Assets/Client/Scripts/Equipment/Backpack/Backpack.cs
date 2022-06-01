@@ -39,7 +39,7 @@ public sealed class Backpack : Equipment
 
         return allItems.ToArray();
     }
-    public IBackpackItem[] GetAllItems(int itemID)
+    public IBackpackItem[] GetAllItems(string itemID)
     {
         var allItemsOfType = new List<IBackpackItem>();
         var requairedSlots = _slots.FindAll(slot => !slot.isEmpty && slot.itemID == itemID);
@@ -55,12 +55,12 @@ public sealed class Backpack : Equipment
             return _slots[lastItemIndex];
         return null;
     }
-    public IBackpackItem GetItem(int itemID)
+    public IBackpackItem GetItem(string itemID)
     {
         return _slots.Find(slot => slot.itemID == itemID).item;
     }
 
-    public int GetItemAmount(int itemID)
+    public int GetItemAmount(string itemID)
     {
         var amount = 0;
         var requairedSlots = _slots.FindAll(slot => !slot.isEmpty && slot.itemID == itemID);
@@ -78,7 +78,7 @@ public sealed class Backpack : Equipment
 
         return amount;
     }
-    private IBackpackSlot[] GetAllSlotsWithItems(int itemID)
+    private IBackpackSlot[] GetAllSlotsWithItems(string itemID)
     {
         return _slots.FindAll(slot => !slot.isEmpty && slot.itemID == itemID).ToArray();
     }
@@ -115,7 +115,7 @@ public sealed class Backpack : Equipment
         slotWithItem.Clear();
         OnInventoryRemovedEvent?.Invoke(Capacity, ItemAmount);
     }
-    public bool HasItem(int itemID)
+    public bool HasItem(string itemID)
     {
         var item = GetItem(itemID);
         return item != null;

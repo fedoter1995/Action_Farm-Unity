@@ -6,16 +6,16 @@ using UnityEngine;
 public abstract class Crops : MonoBehaviour, ITakeDamge
 {
     #region SerializeFields
-    [SerializeField] protected CropsStats _stats;
+    [SerializeField] protected CropsInfo _info;
     [SerializeField] protected CropsStack _cropsStackPrefab;
-
     #endregion
+
     private CropsStackPool cropsStackPool;
     private BoxCollider cropsCollider;
     private MeshRenderer mesh;
     private int healthPoints;
     
-    
+   
     public int HealthPoints => healthPoints;
 
 
@@ -28,13 +28,13 @@ public abstract class Crops : MonoBehaviour, ITakeDamge
 
     protected virtual void Maturation()
     {
-        healthPoints = _stats.HealthPoints;
+        healthPoints = _info.HealthPoints;
         ColliderEnabled(true);
         mesh.enabled = true;
     }
     protected virtual void Initialize()
     {
-        healthPoints = _stats.HealthPoints;
+        healthPoints = _info.HealthPoints;
         cropsCollider = GetComponentInChildren<BoxCollider>();
         mesh = GetComponentInChildren<MeshRenderer>();
         cropsStackPool = new CropsStackPool(transform, _cropsStackPrefab);
@@ -56,15 +56,13 @@ public abstract class Crops : MonoBehaviour, ITakeDamge
     {
         cropsCollider.enabled = activity;
     }
-
     private IEnumerator GrowingRoutine()
     {
         yield return new WaitForSeconds(2);
         TwoSecondsLeftEvent?.Invoke();
-        yield return new WaitForSeconds(_stats.GrowingTime);
+        yield return new WaitForSeconds(_info.GrowingTime);
         Maturation();
     }
-
     public void TakeDamage(int damage)
     {
         healthPoints -= damage;
