@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class GardenBed : MonoBehaviour, IInteractable
+public class GardenBed : MonoBehaviour, IInteractive
 {
     [SerializeField] private Vector2Int _size = new Vector2Int(2,1);
     [SerializeField] private Vector2 _offset = new Vector2(1, 1);
@@ -13,12 +13,11 @@ public class GardenBed : MonoBehaviour, IInteractable
 
     private CropsPool cropsPool;
     private BoxCollider gardenCollider;
-
-    public GameObject CurrentObject => gameObject;
+    private Player currentPlayer;
 
     #region Events
-    public event Action<IInteractable, Player> OnPlayerEnterEvent;
-    public event Action<IInteractable> OnPlayerExitEvent;
+    public event Action<object, Player> OnPlayerEnterEvent;
+    public event Action<object> OnPlayerExitEvent;
     #endregion
     private void Awake()
     {
@@ -44,24 +43,35 @@ public class GardenBed : MonoBehaviour, IInteractable
         gardenCollider.center = new Vector3(_size.x * _offset.x / 2, 1f, _size.y * _offset.y / 2);
         gardenCollider.size = new Vector3(_size.x * _offset.x, 1f, _size.y * _offset.y);
     }
-    public void Interact()
+    private void Harvesting()
     {
-
+        foreach(Crops crops in cropsPool.CropsList)
+        {
+            crops.Harvest();
+        }
+    }
+    public void Interact(object obj)
+    {
+        if(true)
+            Harvesting();
     }
     #region PlayerTrigger
     public void OnTriggerEnter(Collider other)
     {
-        var player = other.GetComponent<Player>();
+        currentPlayer = other.GetComponent<Player>();
 
-        if (player != null)
-            OnPlayerEnterEvent?.Invoke(this,player);
+        if (currentPlayer != null)
+            OnPlayerEnterEvent?.Invoke(this, currentPlayer);
     }
     public void OnTriggerExit(Collider other)
     {
-        var player = other.GetComponent<Player>();
+        currentPlayer = other.GetComponent<Player>();
 
-        if (player != null)
+        if (currentPlayer != null)
+        {
             OnPlayerExitEvent?.Invoke(this);
+        }
+        currentPlayer = null;
     }
     #endregion
 }

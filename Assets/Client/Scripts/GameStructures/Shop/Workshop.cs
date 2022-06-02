@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Architecture;
 
-public class Workshop : MonoBehaviour, IStore, IInteractable
+public class Workshop : MonoBehaviour, IWorkshop
 {
     [SerializeField] private List<Equipment> _assortment;
     [SerializeField] private WorkshopZone _workshopZone;
@@ -11,8 +11,8 @@ public class Workshop : MonoBehaviour, IStore, IInteractable
     private Player player;
     #region Events
     public event Action<object, object, int> BarterEvent;
-    public event Action<IInteractable, Player> OnPlayerEnterEvent;
-    public event Action<IInteractable> OnPlayerExitEvent;
+    public event Action<object, Player> OnPlayerEnterEvent;
+    public event Action<object> OnPlayerExitEvent;
     #endregion
     public List<Equipment> Assortment => _assortment;
     public GameObject CurrentObject => gameObject;
@@ -50,15 +50,6 @@ public class Workshop : MonoBehaviour, IStore, IInteractable
 
         return false;
     }
-    public void BuyItem(Equipment item)
-    {
-        if (TryToBuyItem(item))
-        {
-            Debug.Log($"You buy{item}");
-        }           
-        else
-            Debug.Log($"No money to buy{item}");
-    }
 
     #region Interaction with the Player
     private void EnterTheWorkshop(Player player)
@@ -71,10 +62,14 @@ public class Workshop : MonoBehaviour, IStore, IInteractable
         player = null;
         OnPlayerExitEvent?.Invoke(this);
     }
-
-    public void Interact()
+    public string BuyItem(Equipment item)
     {
-        throw new NotImplementedException();
+        if (TryToBuyItem(item))
+        {
+            return $"You buy{item}";
+        }
+        else
+            return $"No money to buy{item}";
     }
     #endregion
 }

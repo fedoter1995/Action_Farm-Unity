@@ -56,7 +56,7 @@ public class GameUIInteractor : Interactor
 
         if (workshops.Length > 0)
         {
-            foreach (IInteractable workshop in workshops)
+            foreach (IWorkshop workshop in workshops)
             {
                 workshop.OnPlayerEnterEvent += ui.WorkshopPanel.OnPlayerEnter;
                 workshop.OnPlayerExitEvent += ui.WorkshopPanel.OnPlayerExit;

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 
-public abstract class Crops : MonoBehaviour, ITakeDamge
+public abstract class Crops : MonoBehaviour
 {
     #region SerializeFields
     [SerializeField] protected CropsInfo _info;
@@ -11,7 +11,6 @@ public abstract class Crops : MonoBehaviour, ITakeDamge
     #endregion
 
     private CropsStackPool cropsStackPool;
-    private BoxCollider cropsCollider;
     private MeshRenderer mesh;
     private int healthPoints;
     
@@ -28,33 +27,24 @@ public abstract class Crops : MonoBehaviour, ITakeDamge
 
     protected virtual void Maturation()
     {
-        healthPoints = _info.HealthPoints;
-        ColliderEnabled(true);
         mesh.enabled = true;
     }
     protected virtual void Initialize()
     {
-        healthPoints = _info.HealthPoints;
-        cropsCollider = GetComponentInChildren<BoxCollider>();
         mesh = GetComponentInChildren<MeshRenderer>();
         cropsStackPool = new CropsStackPool(transform, _cropsStackPrefab);
     }
-    protected void Harvesting()
+    public void Harvest()
     {
         HarvestingEvent?.Invoke(gameObject);
         GrowingStartEvent?.Invoke();
         StartCoroutine(GrowingRoutine());
         mesh.enabled = false;
-        ColliderEnabled(false);
         DropCropsStack();
-    }    
+    } 
     private void DropCropsStack()
     {
         cropsStackPool.GetCropsStack(transform.position);
-    }
-    private void ColliderEnabled(bool activity)
-    {
-        cropsCollider.enabled = activity;
     }
     private IEnumerator GrowingRoutine()
     {
@@ -62,14 +52,5 @@ public abstract class Crops : MonoBehaviour, ITakeDamge
         TwoSecondsLeftEvent?.Invoke();
         yield return new WaitForSeconds(_info.GrowingTime);
         Maturation();
-    }
-    public void TakeDamage(int damage)
-    {
-        healthPoints -= damage;
-        if (healthPoints <= 0)
-        {
-            Harvesting();
-        }
-
     }
 }

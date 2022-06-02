@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Wheat : Crops, ITakeDamge
+public class Wheat : Crops
 {
     [SerializeField] protected CustomTools.CustomSlicer _slicer;
 

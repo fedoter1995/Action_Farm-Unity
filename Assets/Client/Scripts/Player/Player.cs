@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 
     private PlayerAnimatorController animatorController;
     private Equipments equipments;
+    private float moveCoefficient = 1;
     #region Events
     public event Action EnterTheWorkshopEvent;
     #endregion
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        playerController.Move(stats.Speed, transform);
+        playerController.Move(stats.Speed * moveCoefficient, transform);
     }
     #endregion
 
@@ -67,4 +68,9 @@ public class Player : MonoBehaviour
     {
         ExitTheBarn(other);
     }
+    public void ChangeMoveCoefficient(float moveCoefficient)
+    {
+        this.moveCoefficient = moveCoefficient;
+    }
+
 }

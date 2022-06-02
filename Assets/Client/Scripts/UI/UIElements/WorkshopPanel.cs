@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CustomTools;
 
-public class WorkshopPanel : MonoBehaviour , IInteractablePanel
+public class WorkshopPanel : MonoBehaviour , IWorkshopPanel
 {
     [SerializeField] private List<ShopUiItem> _uiItems;
     [SerializeField] private ShopUiItem _uiSlotPrefab;
@@ -11,6 +11,9 @@ public class WorkshopPanel : MonoBehaviour , IInteractablePanel
 
     private Pool<ShopUiItem> uiItemPool;
     private List<ShopUiItem> activeSlots = new List<ShopUiItem>();
+    private IWorkshop workshop;
+    private Player player;
+
     private void Start()
     {
         Initialize();
@@ -19,45 +22,52 @@ public class WorkshopPanel : MonoBehaviour , IInteractablePanel
     {
         gameObject.SetActive(activity);
     }
-    public void ShowContent(IInteractable obj, Player player)
+    public void ShowContent()
     {
         ChangeActivity(true);
-        var workshop = obj as Workshop;
         foreach(Equipment item in workshop.Assortment)
         {
             var uiSlot = uiItemPool.GetFreeObject();
             uiSlot.transform.position = Vector3.zero;
-            uiSlot.TryToBuyEvent += workshop.BuyItem;
+            uiSlot.TryToBuyEvent += TryToBuyItem;
             activeSlots.Add(uiSlot);
             uiSlot.SetItem(item, player.Equipments.HasWeapon(item.GetStats().ID));
         }
     }
-    public void HideContent(IInteractable obj)
+    public void HideContent()
     {
-        var workshop = obj as Workshop;
         foreach (ShopUiItem uiSlot in activeSlots)
         {
-            uiSlot.TryToBuyEvent -= workshop.BuyItem;
+            uiSlot.TryToBuyEvent -= TryToBuyItem;
             uiSlot.gameObject.SetActive(false);
         }
+        workshop = null;
         ChangeActivity(false);
     }
-    public void OnPlayerEnter(IInteractable obj, Player player)
+    public void OnPlayerEnter(object obj, Player player)
     {
-        var workshop = obj as Workshop;
-        if(workshop != null)
-        {
-            ShowContent(workshop, player);
-        }
-
-    }
-    public void OnPlayerExit(IInteractable obj)
-    {
-        var workshop = obj as Workshop;
+        workshop = obj as IWorkshop;
+        this.player = player; 
         if (workshop != null)
         {
-            HideContent(workshop);
+            ShowContent();
         }
+    }
+    public void OnPlayerExit(object obj)
+    {
+        workshop = obj as IWorkshop;
+        if (workshop != null)
+        {
+            HideContent();
+            workshop = null;
+            player = null;
+        }
+    }
+    public void TryToBuyItem(Equipment item)
+    {
+        if (workshop != null)
+            workshop.BuyItem(item);
+
     }
     private void Initialize()
     {
